@@ -1,0 +1,33 @@
+# Dependencias
+node_modules/
+dist/
+.angular/
+.storybook-storybook/
+storybook-static/
+
+# Variables de entorno y secretos (¡MUY IMPORTANTE!)
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Playwright (Reportes y capturas de los tests)
+/frontend/playwright-report/
+/frontend/test-results/
+
+# IDEs y Editores
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

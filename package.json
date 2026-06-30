@@ -1,0 +1,19 @@
+{
+  "name": "devdoc-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start:frontend": "npm run start -w frontend",
+    "start:backend": "npm run dev -w backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
