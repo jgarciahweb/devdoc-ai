@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* En Tailwind v4, las configuraciones de diseño se hacen aquí dentro */
+@theme {
+  --color-brand-primary: #4f46e5; /* Ejemplo de cómo añadirías un color personalizado */
+}
+
+/* Para añadir el plugin de Typography (prose) en v4, se hace mediante @plugin */
+@plugin "@tailwindcss/typography";

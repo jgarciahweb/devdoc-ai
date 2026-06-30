@@ -1,0 +1,32 @@
+<div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl h-full flex flex-col justify-between">
+  <div>
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <span>💻</span> Pega tu Código
+      </h2>
+      <select
+        [ngModel]="language()"
+        (ngModelChange)="language.set($event)"
+        class="bg-slate-800 text-slate-200 border border-slate-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        @for (lang of languages; track lang.value) {
+          <option [value]="lang.value">{{ lang.label }}</option>
+        }
+      </select>
+    </div>
+
+    <textarea
+      [ngModel]="code()"
+      (ngModelChange)="code.set($event)"
+      placeholder="// Inserta tu función, componente o script aquí..."
+      class="w-full h-96 bg-slate-950 text-emerald-400 font-mono p-4 rounded-lg border border-slate-800 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none placeholder-slate-600 shadow-inner"
+    ></textarea>
+  </div>
+
+  <button
+    (click)="sendCode()"
+    [disabled]="!code().trim()"
+    class="mt-4 w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-medium py-3 px-4 rounded-xl transition-all duration-200 shadow-lg active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2"
+  >
+    <span>✨</span> Generar Documentación con IA
+  </button>
+</div>
