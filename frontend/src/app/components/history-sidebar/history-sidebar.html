@@ -1,0 +1,36 @@
+<div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-xl h-full flex flex-col">
+  <div class="flex items-center gap-2 mb-4 border-b border-slate-800 pb-3">
+    <span class="text-xl">📜</span>
+    <h3 class="text-md font-bold text-slate-200">Historial Reciente</h3>
+    <span class="text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full font-mono">
+      {{ documents().length }}
+    </span>
+  </div>
+
+  <div class="flex-grow overflow-y-auto max-h-[550px] space-y-2 pr-1">
+    @if (documents().length === 0) {
+      <div class="text-center py-8 text-sm text-slate-500">
+        No hay documentos guardados aún.
+      </div>
+    } @else {
+      @for (doc of documents(); track doc._id) {
+        <button
+          (click)="selectDoc(doc)"
+          class="w-full text-left p-3 rounded-lg bg-slate-950/40 hover:bg-slate-800/80 border border-slate-800/60 hover:border-indigo-500/30 transition-all duration-200 group cursor-pointer"
+        >
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-mono text-indigo-400 uppercase tracking-wider bg-indigo-950/50 px-1.5 py-0.5 rounded border border-indigo-900/30">
+              {{ doc.language }}
+            </span>
+            <span class="text-[10px] text-slate-500">
+              {{ doc.createdAt | date:'shortTime' }}
+            </span>
+          </div>
+          <p class="text-sm font-medium text-slate-300 group-hover:text-white truncate">
+            {{ doc.title }}
+          </p>
+        </button>
+      }
+    }
+  </div>
+</div>

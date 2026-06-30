@@ -16,4 +16,22 @@ export class Preview {
     navigator.clipboard.writeText(this.markdownData());
     this.onCopy.emit();
   }
+
+  downloadMarkdownFile() {
+    const content = this.markdownData();
+    if (!content) return;
+
+    const blob = new Blob([content], { type: 'text/markdown;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'README.md');
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
 }
