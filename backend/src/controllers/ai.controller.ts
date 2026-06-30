@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { GoogleGenAI } from '@google/genai';
+import DocumentModel from '../models/Document';
 
 export const generateDocs = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -41,9 +42,23 @@ export const generateDocs = async (req: Request, res: Response): Promise<void> =
       contents: prompt,
     });
 
+    const markdownText = response.text || '';
+
+    const snippetTitle = code.trim().split('\n')[0].substring(0, 30) || 'Código sin título';
+    
+    const nuevoDocumento = new DocumentModel({
+      title: snippetTitle.replace(/[{}/;()]/g, ''),
+      language: language || 'Autodetectar',
+      codeOriginal: code,
+      markdownGenerado: markdownText
+    });
+
+    await nuevoDocumento.save();
+
     res.status(200).json({
       success: true,
-      markdown: response.text,
+      id: nuevoDocumento._id,
+      markdown: markdownText,
     });
 
   } catch (error: any) {
@@ -51,6 +66,23 @@ export const generateDocs = async (req: Request, res: Response): Promise<void> =
     res.status(500).json({
       success: false,
       error: 'Hubo un error al procesar el código con la Inteligencia Artificial.',
+    });
+  }
+};
+
+export const getHistory = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const history = await DocumentModel.find().sort({ createdAt: -1 }).limit(10);
+    
+    res.status(200).json({
+      success: true,
+      history
+    });
+  } catch (error) {
+    console.error('Error al obtener el historial:', error);
+    res.status(500).json({
+      success: false,
+      error: 'No se pudo recuperar el historial de la base de datos.'
     });
   }
 };
