@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
     "@tailwindcss/postcss": "^4.3.2",
+    "katex": "^0.16.47",
+    "marked-katex-extension": "^5.1.10",
     "ngx-markdown": "^22.0.0",
     "postcss": "^8.5.16",
     "rxjs": "~7.8.0",
