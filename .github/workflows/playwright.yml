@@ -26,7 +26,7 @@ jobs:
       run: npm install
 
     - name: 🎭 Instalar navegadores de Playwright
-      run: npx playwright install --with-deps Chromium
+      run: npx playwright install --with-deps chromium
 
     - name: 🚀 Levantar la app de Angular en segundo plano
       # Arrancamos el frontend. El flag --skip-nx-cache (si usas nx) o simplemente ng serve.
